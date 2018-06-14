@@ -15,6 +15,10 @@ def index():
 def index():
   return static_file('main.css', '.')
 
+@get('/logos/<filename>')
+def index(filename):
+  return static_file(filename, './logos')
+
 @post('/launch')
 def launch():
   username = request.params.get('username')
