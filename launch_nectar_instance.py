@@ -50,7 +50,7 @@ def makeInstance(sess, zone):
       pass
     return ip
   else:
-    image = "9f8db28d-e234-468b-9d7e-7b989dc42a53"
+    image = "dc16818a-aedf-4841-adfe-d6e7a5e05cb6"
     flavor = '885227de-b7ee-42af-a209-2f1ff59bc330' # m2.medium
     security_groups = [SECURITY_GROUP_NAME]
     server = nova.servers.create(INSTANCE_NAME, image, flavor, security_groups=security_groups, availability_zone=zone)

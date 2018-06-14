@@ -23,8 +23,14 @@ $("#login").submit(function(e) {
           image: image
         },
         success: function(data, status, xhr) {
-          $("#status").text("Container ready");
-          $("body").append("<iframe src='" + data + "' seamless allowfullscreen align='center'></iframe>");
+          var time = 3;
+          setInterval(function(){
+            $("#status").text("Container ready! Redirecting you in " + time);
+            if (time == 0) {
+              window.location.href = data;
+            }
+            time--;
+          }, 1000);
         },
         error: function() {
           $("#status").text("Unable to launch " + image + " - is it accessible on Docker Hub?");
