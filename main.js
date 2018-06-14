@@ -14,14 +14,22 @@ $("#login").submit(function(e) {
     },
     success: function(data, status, xhr) {
       console.log(data, status, xhr);
-      var time = 3;
-      setInterval(function(){
-        $("#status").text("Nectar instance ready! Redirecting you in " + time);
-        if (time == 0) {
-          window.location.href = "http://" + data;
+      $("#status").text("Nectar instance ready! Launching container...");
+      console.log("launching container on " + data);
+      var image = "jupyter/datascience-notebook";
+      $.ajax("http://" + data + ":8080", {
+        type: "POST",
+        data: {
+          image: image
+        },
+        success: function(data, status, xhr) {
+          $("#status").text("Container ready");
+          $("body").append("<iframe src='" + data + "' seamless allowfullscreen align='center'></iframe>");
+        },
+        error: function() {
+          $("#status").text("Unable to launch " + image + " - is it accessible on Docker Hub?");
         }
-        time--;
-      }, 1000);
+      });
     },
     error: function() {
       $("#status").text("Login failed - check password?");
