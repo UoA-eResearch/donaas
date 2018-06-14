@@ -7,6 +7,8 @@ import os
 from neutronclient.v2_0 import client
 from pprint import pprint
 import sys
+import time
+import json
 
 SECURITY_GROUP_NAME="all_ports_ingress"
 INSTANCE_NAME="donaas"
@@ -52,7 +54,11 @@ def makeInstance(sess, zone):
     flavor = '885227de-b7ee-42af-a209-2f1ff59bc330' # m2.medium
     security_groups = [SECURITY_GROUP_NAME]
     server = nova.servers.create(INSTANCE_NAME, image, flavor, security_groups=security_groups, availability_zone=zone)
-    pprint(server)
+    #wait for network
+    while not server.networks:
+      server = nova.servers.get(server.id)
+      print(server.name + " status:" + server.status + ", net:" + json.dumps(server.networks))
+      time.sleep(1)
     ip = server.networks.values()[0][0]
     return ip
 
