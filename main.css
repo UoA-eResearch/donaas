@@ -64,3 +64,7 @@ body {
 	height: 100px;
 	width: auto;
 }
+
+.card-text{
+	height: 200px;
+}
