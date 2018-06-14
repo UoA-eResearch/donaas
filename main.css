@@ -54,17 +54,26 @@ body {
 
 .docker-select {
   width: 100%;
-  max-width: 50%;
+  max-width: 70%;
   padding: 15px;
   margin: auto;
 }
 
 .card-img-top{
+	display: block;
 	margin: 20px;
-	height: 100px;
-	width: auto;
+	margin-left: auto;
+	margin-right: auto;
+	max-height: 100px;
+	max-width: 180px;
+	height: auto;
+	width: 60%;
 }
 
 .card-text{
-	height: 200px;
+	
+}
+
+#custom-docker{
+	margin-top: 25px;
 }
