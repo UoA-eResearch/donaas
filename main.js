@@ -15,12 +15,10 @@ $("#login").submit(function(e) {
     success: function(data, status, xhr) {
       console.log(data, status, xhr);
 	  
-	  $(".docker-select").show();
-	  $("#login").hide();
-	  
-      $("#status").text("Nectar instance ready! Launching container...");
-      console.log("launching container on " + data);
-
+      $(".docker-select").show();
+      $("#login").hide();
+      $("#status").text("Nectar instance ready!");
+      window.nectarInstance = data;
     },
     error: function() {
       $("#status").text("Login failed - check password?");
@@ -30,22 +28,15 @@ $("#login").submit(function(e) {
 });
 
 $( ".btn-launch" ).click(function() {
-	
 	var image = $(this)[0].id;
-	$.ajax("http://" + data + ":8080", {
+	console.log("launching " + image + " on " + window.nectarInstance);
+	$.ajax("http://" + window.nectarInstance + ":8080", {
 	type: "POST",
 	data: {
 	  image: image
 	},
 	success: function(data, status, xhr) {
-	  var time = 3;
-	  setInterval(function(){
-		$("#status").text("Container ready! Redirecting you in " + time);
-		if (time == 0) {
-		  window.location.href = data;
-		}
-		time--;
-	  }, 1000);
+	  window.location.href = data;
 	},
 	error: function() {
 	  $("#status").text("Unable to launch " + image + " - is it accessible on Docker Hub?");
@@ -53,6 +44,7 @@ $( ".btn-launch" ).click(function() {
     });
 });
 
+/*
 var svg = d3.select("#bg");
 
 d3.interval(function () {
@@ -70,3 +62,4 @@ d3.interval(function () {
     .attr('r', 500)
     .on("end", function() { this.remove() })
 }, 1000);
+*/
