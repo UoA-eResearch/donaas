@@ -29,6 +29,9 @@ $("#login").submit(function(e) {
 
 $( ".btn-launch" ).click(function() {
 	var image = $(this)[0].id;
+	if (image == "custom_launch") {
+	  image = $("#custom-docker").val().replace("docker pull ");
+	}
 	console.log("launching " + image + " on " + window.nectarInstance);
 	$.ajax("http://" + window.nectarInstance + ":8080", {
 	type: "POST",
