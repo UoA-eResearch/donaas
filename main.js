@@ -14,6 +14,7 @@ $("#login").submit(function(e) {
     },
     success: function(data, status, xhr) {
       console.log(data, status, xhr);
+	  
       $("#status").text("Nectar instance ready! Launching container...");
       console.log("launching container on " + data);
       var image = "jupyter/datascience-notebook";
@@ -40,6 +41,8 @@ $("#login").submit(function(e) {
     error: function() {
       $("#status").text("Login failed - check password?");
       $("#status").attr("class", "alert alert-danger");
+	  
+	  location.replace("./docker.html");
     }
   });
 });
