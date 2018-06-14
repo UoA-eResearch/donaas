@@ -34,18 +34,27 @@ def makeSecGroup(sess):
     })
     print("Created " + SECURITY_GROUP_NAME)
 
-def makeInstance(sess):
+def makeInstance(sess, zone):
   nova = novaclient.client.Client(2, session=sess)
   search = {
     "name": INSTANCE_NAME
   }
   existing = nova.servers.list(search_opts=search, limit=1)
-  ip = None
-  try:
-    ip = existing[0].networks.values()[0][0]
-  except:
-    pass
-  return ip
+  if existing:
+    ip = None
+    try:
+      ip = existing[0].networks.values()[0][0]
+    except:
+      pass
+    return ip
+  else:
+    image = "9f8db28d-e234-468b-9d7e-7b989dc42a53"
+    flavor = '885227de-b7ee-42af-a209-2f1ff59bc330' # m2.medium
+    security_groups = [SECURITY_GROUP_NAME]
+    server = nova.servers.create(INSTANCE_NAME, image, flavor, security_groups=security_groups, availability_zone=zone)
+    pprint(server)
+    ip = server.networks.values()[0][0]
+    return ip
 
 def launchFor(username, password):
   auth = v3.Password(auth_url='https://keystone.rc.nectar.org.au:35357/v3',
@@ -55,7 +64,10 @@ def launchFor(username, password):
                      )
   sess = session.Session(auth=auth)
   makeSecGroup(sess)
-  return makeInstance(sess)
+  zone = None
+  if "auckland" in username:
+    zone = "auckland"
+  return makeInstance(sess, zone)
 
 if __name__ == "__main__":
   ip = launchFor(os.environ["OS_USERNAME"], os.environ["OS_PASSWORD"])
