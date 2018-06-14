@@ -53,6 +53,7 @@ $( ".btn-launch" ).click(function() {
     });
 });
 
+/*
 var svg = d3.select("#bg");
 
 d3.interval(function () {
@@ -70,3 +71,4 @@ d3.interval(function () {
     .attr('r', 500)
     .on("end", function() { this.remove() })
 }, 1000);
+*/

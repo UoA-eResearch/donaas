@@ -1,16 +1,54 @@
 html,
 body {
   height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-svg {
-  width: 100%;
+#bg {
+	width: 100%;
   height: 100%;
-  margin: 0;
-  overflow: hidden;
-  z-index: -1000;
   position: absolute;
+  z-index: -1000;
+  background: -webkit-linear-gradient(top, rgb(161,219,255) 0%,rgb(203,235,255) 53%,rgb(240,249,255) 100%); /* Chrome10+,Safari5.1+ */
+  background-size: 100% 100%;
+  overflow: hidden;
 }
+
+.clouds {
+  width: 200x;
+  height: 300px;
+  position: absolute;
+  left: 0;
+}
+
+.cloud1 {
+	top: 80px;
+  z-index: 100;
+  fill: #eee;
+  /* Animation shorthand syntax order: name, duration, timing-function, delay, iteration-count, direction, fill-mode */
+  -webkit-animation: move 40s linear infinite;
+  -moz-animation: move 40s linear infinite;
+  -o-animation: move 40s linear infinite;
+  animation: move 40s linear infinite;
+}
+
+.cloud2 {
+	top: 240px;
+  z-index: 200;
+  fill: #eee;
+  -webkit-animation: move 60s linear 10s infinite backwards;
+  -moz-animation: move 60s linear 10s infinite backwards;
+  -o-animation: move 60s linear 10s infinite backwards;
+  animation: move 60s linear 10s infinite backwards;
+}
+
+@-webkit-keyframes move {
+  from {-webkit-transform: translateX(-400px);}
+  to {-webkit-transform: translateX(2000px);}
+}
+
+
 
 body {
   display: -ms-flexbox;
