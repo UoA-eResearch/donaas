@@ -1,7 +1,7 @@
 $("#login").submit(function(e) {
   e.preventDefault();
   $("#status").show();
-  $("#status").text("Logging in...");
+  $("#status").text("Launching NeCTAR instance...");
   $("#status").attr("class", "alert alert-primary");
   var username = $("#username").val();
   var pw = $("#password").val();
@@ -17,7 +17,7 @@ $("#login").submit(function(e) {
 	  
       $(".docker-select").show();
       $("#login").hide();
-      $("#status").text("Nectar instance ready!");
+      $("#status").text("NeCTAR instance ready!");
       window.nectarInstance = data;
     },
     error: function() {
