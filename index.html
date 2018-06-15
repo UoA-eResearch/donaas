@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
-    <title>Docker on Nectar as a Service</title>
+    <title>Docker on NeCTAR as a Service</title>
     <link rel="stylesheet" href="main.css">
   </head>
   <body class="text-center">
@@ -21,18 +21,21 @@
       </svg>
     </div>
     
-    <form id="login" class="form-signin" style="display: none">
-      <h1 class="h3 mb-3 font-weight-normal">Docker on Nectar as a Service</h1>
+    <form id="login" class="form-signin">
+      <h1 class="h3 mb-3 font-weight-normal">Docker on NeCTAR as a Service</h1>
       <label for="username" class="sr-only">Username</label>
-      <input type="text" id="username" class="form-control" placeholder="Username" required autofocus>
+      <input type="text" id="username" class="form-control" placeholder="Email" required autofocus>
       <label for="password" class="sr-only">Password</label>
-      <input type="password" id="password" class="form-control" placeholder="Password" required>
+      <input type="password" id="password" class="form-control" placeholder="Password" required aria-describedby="passwordHelpBlock">
+      <small id="passwordHelpBlock" class="form-text text-muted">
+        Your NeCTAR password, as set <a href="https://dashboard.rc.nectar.org.au/settings/reset-password/">here</a>
+      </small>
       <div id="status" class="alert alert-primary" style="display:none" role="alert"></div>
       <button id="submit" class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
     </form>
 	
 	
-	<div class="docker-select">
+	<div class="docker-select" style="display: none">
       <h1 class="h3 mb-3 font-weight-normal">Docker on Nectar as a Service</h1>
 	  <br>
 			<div class="card-deck">
@@ -55,7 +58,6 @@
 				  </div>
 				  <div class="card-footer bg-transparent border-success">
 						<a href="#" class="btn btn-primary btn-launch" id="rocker/rstudio">Launch</a>
-						
 				  </div>
 				</div>
 				

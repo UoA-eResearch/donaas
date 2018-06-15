@@ -1,7 +1,7 @@
 $("#login").submit(function(e) {
   e.preventDefault();
   $("#status").show();
-  $("#status").text("Logging in...");
+  $("#status").text("Launching NeCTAR instance...");
   $("#status").attr("class", "alert alert-primary");
   var username = $("#username").val();
   var pw = $("#password").val();
@@ -17,7 +17,7 @@ $("#login").submit(function(e) {
 	  
       $(".docker-select").show();
       $("#login").hide();
-      $("#status").text("Nectar instance ready!");
+      $("#status").text("NeCTAR instance ready!");
       window.nectarInstance = data;
     },
     error: function() {
@@ -28,10 +28,15 @@ $("#login").submit(function(e) {
 });
 
 $( ".btn-launch" ).click(function() {
-	var id = $(this)[0].id;
+
 	$(this).append( "<div class='loader' style='display: inline-block'></div>" );
 	$(this).addClass('disabled');
-	var image = id;
+
+	var image = $(this)[0].id;
+	if (image == "custom_launch") {
+	  image = $("#custom-docker").val().replace("docker pull ");
+	}
+
 	console.log("launching " + image + " on " + window.nectarInstance);
 	$.ajax("http://" + window.nectarInstance + ":8080", {
 	type: "POST",
