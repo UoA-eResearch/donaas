@@ -27,6 +27,14 @@ $("#login").submit(function(e) {
   });
 });
 
+$('#custom-docker').on('keypress', function (e) {
+  if (e.which === 13) {
+    //Disable textbox to prevent multiple submit
+    $(this).attr("disabled", "disabled");
+    $("#custom_launch").click();
+  }
+});
+
 $( ".btn-launch" ).click(function() {
 
 	$(this).append( "<div class='loader' style='display: inline-block'></div>" );
