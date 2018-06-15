@@ -37,6 +37,10 @@ $( ".btn-launch" ).click(function() {
 	  image = $("#custom-docker").val().replace("docker pull ");
 	}
 
+	if (image.indexOf(":") == -1) {
+	  image += ":latest";
+	}
+
 	console.log("launching " + image + " on " + window.nectarInstance);
 	$.ajax("http://" + window.nectarInstance + ":8080", {
 	type: "POST",

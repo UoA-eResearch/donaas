@@ -9,6 +9,7 @@ from pprint import pprint
 import sys
 import time
 import json
+import requests
 
 SECURITY_GROUP_NAME="all_ports_ingress"
 INSTANCE_NAME="donaas"
@@ -60,6 +61,13 @@ def makeInstance(sess, zone):
       print(server.name + " status:" + server.status + ", net:" + json.dumps(server.networks))
       time.sleep(1)
     ip = server.networks.values()[0][0]
+    serverUp = False
+    while not serverUp:
+      try:
+        requests.get("http://" + ip + ":8080")
+        serverUp = True
+      except:
+        pass
     return ip
 
 def launchFor(username, password):

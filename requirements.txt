@@ -2,3 +2,4 @@ python-openstackclient
 python-neutronclient
 bottle
 gunicorn
+import requests
