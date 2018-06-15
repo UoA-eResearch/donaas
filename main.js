@@ -28,7 +28,10 @@ $("#login").submit(function(e) {
 });
 
 $( ".btn-launch" ).click(function() {
-	var image = $(this)[0].id;
+	var id = $(this)[0].id;
+	$(this).append( "<div class='loader' style='display: inline-block'></div>" );
+	$(this).addClass('disabled');
+	var image = id;
 	console.log("launching " + image + " on " + window.nectarInstance);
 	$.ajax("http://" + window.nectarInstance + ":8080", {
 	type: "POST",
@@ -36,6 +39,7 @@ $( ".btn-launch" ).click(function() {
 	  image: image
 	},
 	success: function(data, status, xhr) {
+	  $(this).removeClass("loader");
 	  window.location.href = data;
 	},
 	error: function() {
