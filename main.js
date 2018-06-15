@@ -57,7 +57,9 @@ $( ".btn-launch" ).click(function() {
 	},
 	success: function(data, status, xhr) {
 	  $(this).removeClass("loader");
-	  window.location.href = data;
+	  setTimeout(function() {
+	    window.location.href = data;
+	  }, 1000);
 	},
 	error: function() {
 	  $("#status").text("Unable to launch " + image + " - is it accessible on Docker Hub?");
