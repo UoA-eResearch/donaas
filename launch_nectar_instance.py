@@ -71,6 +71,7 @@ def makeInstance(sess, zone):
     return ip
 
 def launchFor(username, password):
+  print("Launching for " + username)
   auth = v3.Password(auth_url='https://keystone.rc.nectar.org.au:35357/v3',
                      username=username,
                      password=password,
